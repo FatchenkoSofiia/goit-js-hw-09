@@ -17,20 +17,28 @@ const loadForm = () => {
   }
 };
 
+form.addEventListener('input', () => {
+  saveForm();
+});
+
+window.addEventListener('load', () => {
+  loadForm();
+});
+
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-  if (form.elements.email.value === '' || form.elements.message.value === '') {
+  if (form.elements.email.value.trim() === '' || form.elements.message.value.trim() === '') {
     alert('Please enter your email and message');
     return;
   }
-
-  localStorage.removeItem('feedback-form-state');
 
   console.log({
     email: form.elements.email.value.trim(),
     message: form.elements.message.value.trim(),
   });
+
+  localStorage.removeItem('feedback-form-state');
 
   form.reset();
 });
